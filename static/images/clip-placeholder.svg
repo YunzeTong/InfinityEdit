@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" font-family="Noto Sans, sans-serif">
+  <rect width="320" height="180" fill="#0d1018"/>
+  <circle cx="160" cy="84" r="26" fill="none" stroke="#3a6df0" stroke-width="3"/>
+  <path d="M152,72 L176,84 L152,96 Z" fill="#3a6df0"/>
+  <text x="160" y="140" text-anchor="middle" font-size="12" fill="#6b7280">your clip here</text>
+</svg>

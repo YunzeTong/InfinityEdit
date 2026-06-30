@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ============ EDIT: page <title> and social meta ============ -->
+  <title>InfinityEdit: Streaming Infinite Video Editing</title>
+  <meta name="description" content="InfinityEdit: instruction-guided streaming video editing for unbounded sequential edits.">
+
+  <!-- Open Graph / social preview (EDIT urls + image) -->
+  <meta property="og:title" content="InfinityEdit: Streaming Infinite Video Editing">
+  <meta property="og:description" content="Instruction-guided streaming video editing for unbounded sequential edits.">
+  <meta property="og:image" content="static/images/teaser.svg">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2213%22 font-size=%2214%22>%E2%88%9E</text></svg>">
+
+  <!-- Bulma + Font Awesome via CDN (swap to local files for fully offline use) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/index.css?v=3">
+</head>
+
+<body>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <!-- ============ EDIT: paper title ============ -->
+          <h1 class="title is-2 publication-title">
+            InfinityEdit: Streaming Infinite Video Editing<br>
+            <span class="subtitle-line">with a Frozen Backbone and a Lightweight Edit Adapter</span>
+          </h1>
+
+          <!-- ============ EDIT: authors. Superscripts map to affiliations below ============ -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Author One</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Author Two</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="#">Author Three</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="#">Senior Author</a><sup>1&#9993;</sup></span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>1</sup>Affiliation One</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Affiliation Two</span>
+          </div>
+          <div class="is-size-7 publication-authors note">
+            <span>&#9993; Corresponding author</span>
+          </div>
+
+          <!-- ============ EDIT: link buttons (set href; remove any you don't have yet) ============ -->
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="#" class="external-link button is-rounded is-dark">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#" class="external-link button is-rounded is-dark">
+                <span class="icon"><i class="ai ai-arxiv"></i><i class="fas fa-file-lines"></i></span>
+                <span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#" class="external-link button is-rounded is-dark">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#bibtex" class="external-link button is-rounded is-dark">
+                <span class="icon"><i class="fas fa-quote-left"></i></span>
+                <span>BibTeX</span>
+              </a>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TEASER ===================== -->
+<section class="section teaser-section">
+  <div class="container is-max-widescreen">
+    <p class="teaser-tagline has-text-centered">
+      One instruction after another, applied to a live stream &mdash; edits stack
+      <b>indefinitely</b> without re-encoding the source or growing memory.
+    </p>
+    <!-- The teaser editing chain is rendered by JS into this container (config: CHAINS[0] tag 'teaser'). -->
+    <div id="teaser-chain" class="chains-container"></div>
+  </div>
+</section>
+
+<!-- ===================== ABSTRACT ===================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- ============ EDIT: abstract text ============ -->
+          <p>
+            Traditional video editing operates <em>in place</em>: it transforms a fixed-length
+            clip frame-by-frame against the source. We instead study <b>streaming video editing</b>,
+            where an edit produces a temporally <em>subsequent</em> segment that continues an
+            ongoing stream, and where a sequence of instructions can be applied in turn so that each
+            edited segment becomes the conditioning history for the next &mdash; enabling
+            <b>unbounded sequential editing</b>.
+          </p>
+          <p>
+            Built on a frozen streaming long-video generator, our method attaches a lightweight
+            <b>Edit-Ignition Adapter</b> that injects an instruction while preserving temporal
+            consistency, leaving every base weight untouched. At inference, the adapter
+            &ldquo;ignites&rdquo; an edit on a single chunk and the frozen backbone propagates it
+            through history; an <b>anchored sliding-window</b> keeps memory constant so edits can be
+            stacked forever without drift. (Placeholder abstract &mdash; replace with the final text.)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== METHOD / PIPELINE ===================== -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Method</h2>
+    <figure class="image pipeline-figure">
+      <!-- ============ EDIT: replace with your pipeline / architecture figure ============ -->
+      <img src="static/images/pipeline.svg" alt="InfinityEdit pipeline">
+    </figure>
+    <p class="caption has-text-centered content">
+      <b>Overview.</b> A frozen streaming backbone (Helios) generates chunk-by-chunk; a trainable
+      Edit-Ignition Adapter (History Cross-Attention &rarr; Temporal Causal Self-Attention &rarr;
+      Edit Cross-Attention) injects the instruction. Replace this placeholder with your real figure.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== SHORT VIDEO EDITING (single instruction, by category) ===================== -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Short Video Editing</h2>
+    <p class="section-lead has-text-centered content">
+      A single instruction applied to a source clip produces the next, edited segment.
+      We show one case per category; hover (or tap) an instruction to read it in full.
+    </p>
+    <!-- Categories &amp; cases render here from SHORT_EDITS in static/js/index.js -->
+    <div id="short-edits" class="chains-container"></div>
+  </div>
+</section>
+
+<!-- ===================== INFINITE SEQUENTIAL EDITING (core demo) ===================== -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Infinite Sequential Editing</h2>
+    <p class="section-lead has-text-centered content">
+      Each row is one editing chain. The left-most clip is the <b>source</b>; every arrow applies a
+      new instruction on top of the previous result. Scroll a row horizontally to follow the chain.
+    </p>
+    <!-- Editing chains (tag 'gallery') are rendered here by JS from static/js/index.js -->
+    <div id="chains-gallery" class="chains-container"></div>
+  </div>
+</section>
+
+<!-- ===================== COMPARISON (optional) ===================== -->
+<section class="section comparison-section">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Comparison with Baseline</h2>
+    <p class="section-lead has-text-centered content">
+      Naively swapping the backbone's scene prompt for the edit instruction (Helios baseline) vs.
+      our adapter. Comparison rows (tag 'compare') render below.
+    </p>
+    <div id="chains-compare" class="chains-container"></div>
+  </div>
+</section>
+
+<!-- ===================== BIBTEX ===================== -->
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <!-- ============ EDIT: fill in your citation ============ -->
+    <pre class="bibtex"><code>@article{infinityedit2026,
+  title   = {InfinityEdit: Streaming Infinite Video Editing},
+  author  = {Author One and Author Two and Author Three and Senior Author},
+  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  year    = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      Website template adapted from the
+      <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.
+      This page is licensed under
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+    </p>
+  </div>
+</footer>
+
+<script src="static/js/index.js?v=3"></script>
+</body>
+</html>
