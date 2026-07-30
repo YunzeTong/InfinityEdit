@@ -50,6 +50,9 @@ body {
 }
 
 /* ---------- Section helpers ---------- */
+/* demo sections span nearly the full viewport to minimise side whitespace,
+   but stay centered and capped on ultra-wide monitors */
+.demo-container { max-width: 1700px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
 .section-lead, .caption { color: var(--muted); max-width: 880px; margin: 0.5rem auto 1.8rem auto; }
 .pipeline-figure { max-width: 1000px; margin: 0 auto; }
 .pipeline-figure img {
@@ -94,7 +97,8 @@ body {
 
 .vid-card {
   flex: 0 0 auto;
-  width: 260px;
+  width: 420px;
+  max-width: 88vw;
   scroll-snap-align: start;
   background: var(--card-bg);
   border: 1px solid var(--line);
@@ -196,6 +200,36 @@ body {
 }
 .short-case { margin-bottom: 0; flex: 0 0 auto; }
 .short-case .chain-row { overflow-x: visible; justify-content: center; }
+/* two cases per category share a row, so use smaller clips to fit the page width */
+.short-case .vid-card { width: 300px; }
+.short-case .chain-arrow { width: 100px; }
+
+/* comparison rows: many clips per row -> smaller clips so a full chain stays visible */
+.chain-compare .vid-card { width: 290px; }
+.chain-compare .chain-arrow { width: 110px; }
+
+/* scene-prompt stand-in card for pure-T2V (prompt-switch) baselines */
+.scene-card .scene-body {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem;
+  background: linear-gradient(135deg, #eef2ff, #f4f6fb);
+}
+.scene-card .instr {
+  cursor: pointer;
+  background: #fff;
+  border: 1px dashed var(--accent);
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: var(--ink);
+  max-width: 92%;
+  text-align: center;
+}
+.comparison-note { font-size: 0.85rem; margin-top: 1.2rem; }
 
 /* ---------- BibTeX ---------- */
 pre.bibtex {

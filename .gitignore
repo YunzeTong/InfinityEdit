@@ -1,0 +1,17 @@
+.DS_Store
+**/.DS_Store
+serve.py
+
+# internal video metadata (leaks cluster paths / checkpoint names) — not used by the site
+**/metadata.txt
+**/metainfo.txt
+
+# demo videos kept locally but intentionally not published (unused by the page)
+static/videos/comparison/case1/Anchor Forcing/
+static/videos/comparison/case1/Helios_Base/
+static/videos/comparison/case1/InfinityRoPE/
+static/videos/comparison/case1/LucyEdit/
+static/videos/comparison/case1/SANA-Streaming/
+static/videos/comparison/case2/Anchor Forcing/source.mp4
+static/videos/comparison/case2/InfinityRoPE/source.mp4
+static/videos/long-generation/case3/edit_3_american comic.mp4

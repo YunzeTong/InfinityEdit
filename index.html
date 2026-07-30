@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- ============ EDIT: page <title> and social meta ============ -->
-  <title>InfinityEdit: Streaming Infinite Video Editing</title>
+  <title>InfinityEdit: Infinite Streaming Video Editing with a Lightweight Edit-Ignition Adapter</title>
   <meta name="description" content="InfinityEdit: instruction-guided streaming video editing for unbounded sequential edits.">
 
   <!-- Open Graph / social preview (EDIT urls + image) -->
-  <meta property="og:title" content="InfinityEdit: Streaming Infinite Video Editing">
+  <meta property="og:title" content="InfinityEdit: Infinite Streaming Video Editing with a Lightweight Edit-Ignition Adapter">
   <meta property="og:description" content="Instruction-guided streaming video editing for unbounded sequential edits.">
   <meta property="og:image" content="static/images/teaser.svg">
   <meta property="og:type" content="website">
@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="static/css/index.css?v=3">
+  <link rel="stylesheet" href="static/css/index.css?v=6">
 </head>
 
 <body>
@@ -34,16 +34,16 @@
 
           <!-- ============ EDIT: paper title ============ -->
           <h1 class="title is-2 publication-title">
-            InfinityEdit: Streaming Infinite Video Editing<br>
-            <span class="subtitle-line">with a Frozen Backbone and a Lightweight Edit Adapter</span>
+            InfinityEdit: Infinite Streaming Video Editing<br>
+            <span class="subtitle-line">with a Lightweight Edit-Ignition Adapter</span>
           </h1>
 
           <!-- ============ EDIT: authors. Superscripts map to affiliations below ============ -->
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="#">Author One</a><sup>1</sup>,</span>
+              <a href="#">Yunze Tong</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="#">Author Two</a><sup>1,2</sup>,</span>
+              <a href="#">Mushui Liu</a><sup>1,2</sup>,</span>
             <span class="author-block">
               <a href="#">Author Three</a><sup>2</sup>,</span>
             <span class="author-block">
@@ -99,8 +99,6 @@
       One instruction after another, applied to a live stream &mdash; edits stack
       <b>indefinitely</b> without re-encoding the source or growing memory.
     </p>
-    <!-- The teaser editing chain is rendered by JS into this container (config: CHAINS[0] tag 'teaser'). -->
-    <div id="teaser-chain" class="chains-container"></div>
   </div>
 </section>
 
@@ -152,39 +150,58 @@
 
 <!-- ===================== SHORT VIDEO EDITING (single instruction, by category) ===================== -->
 <section class="section">
-  <div class="container is-max-widescreen">
-    <h2 class="title is-3 has-text-centered">Short Video Editing</h2>
+  <div class="container is-fluid demo-container">
+    <h2 class="title is-3 has-text-centered">Single-Video Continued Editing</h2>
     <p class="section-lead has-text-centered content">
-      A single instruction applied to a source clip produces the next, edited segment.
-      We show one case per category; hover (or tap) an instruction to read it in full.
+      A single instruction applied to a source clip produces the next, edited segment that
+      continues it. We group cases by edit type; hover (or tap) an instruction to read it in full.
     </p>
     <!-- Categories &amp; cases render here from SHORT_EDITS in static/js/index.js -->
     <div id="short-edits" class="chains-container"></div>
   </div>
 </section>
 
-<!-- ===================== INFINITE SEQUENTIAL EDITING (core demo) ===================== -->
+<!-- ===================== LONG VIDEO GENERATION ===================== -->
 <section class="section">
-  <div class="container is-max-widescreen">
-    <h2 class="title is-3 has-text-centered">Infinite Sequential Editing</h2>
+  <div class="container is-fluid demo-container">
+    <h2 class="title is-3 has-text-centered">Long Video Generation</h2>
     <p class="section-lead has-text-centered content">
-      Each row is one editing chain. The left-most clip is the <b>source</b>; every arrow applies a
-      new instruction on top of the previous result. Scroll a row horizontally to follow the chain.
+      Our model generates long videos while a few instructions are applied in sequence. Each row is
+      one case: the left-most clip is the <b>source</b>, and every arrow applies a new instruction on
+      top of the previous result.
     </p>
-    <!-- Editing chains (tag 'gallery') are rendered here by JS from static/js/index.js -->
-    <div id="chains-gallery" class="chains-container"></div>
+    <!-- Chains tagged 'longgen' render here (see CHAINS in static/js/index.js) -->
+    <div id="chains-longgen" class="chains-container"></div>
   </div>
 </section>
 
-<!-- ===================== COMPARISON (optional) ===================== -->
-<section class="section comparison-section">
-  <div class="container is-max-widescreen">
-    <h2 class="title is-3 has-text-centered">Comparison with Baseline</h2>
+<!-- ===================== INFINITE SEQUENTIAL EDITING (reserved) ===================== -->
+<section class="section">
+  <div class="container is-fluid demo-container">
+    <h2 class="title is-3 has-text-centered">Infinite Sequential Editing</h2>
     <p class="section-lead has-text-centered content">
-      Naively swapping the backbone's scene prompt for the edit instruction (Helios baseline) vs.
-      our adapter. Comparison rows (tag 'compare') render below.
+      Stacking many instructions on a single continuous stream. Each row is one case: the left-most
+      clip is the <b>source</b>, and every arrow applies a new instruction on top of the previous result.
+    </p>
+    <!-- Chains tagged 'infinite' render here; add them to CHAINS in static/js/index.js -->
+    <div id="chains-infinite" class="chains-container"></div>
+  </div>
+</section>
+
+<!-- ===================== COMPARISON ===================== -->
+<section class="section comparison-section">
+  <div class="container is-fluid demo-container">
+    <h2 class="title is-3 has-text-centered">Comparison with Baselines</h2>
+    <p class="section-lead has-text-centered content">
+      The same sequence of instructions applied to one source (zoom out &rarr; move up
+      &rarr; zoom in). Each row is a different method; <b>Ours</b> is shown first.
+      Hover (or tap) an instruction to read it in full.
     </p>
     <div id="chains-compare" class="chains-container"></div>
+    <p class="caption comparison-note has-text-centered content">
+      &dagger; denotes pure T2V generation methods that do not take visual input;
+      all other methods condition on the same source video.
+    </p>
   </div>
 </section>
 
@@ -214,6 +231,6 @@
   </div>
 </footer>
 
-<script src="static/js/index.js?v=3"></script>
+<script src="static/js/index.js?v=9"></script>
 </body>
 </html>
