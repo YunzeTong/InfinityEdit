@@ -21,7 +21,7 @@ body {
 .publication-title {
   font-family: 'Google Sans', 'Noto Sans', sans-serif;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   margin-bottom: 1.2rem;
 }
 .publication-title .subtitle-line {
@@ -54,8 +54,18 @@ body {
    but stay centered and capped on ultra-wide monitors */
 .demo-container { max-width: 1700px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
 .section-lead, .caption { color: var(--muted); max-width: 880px; margin: 0.5rem auto 1.8rem auto; }
+.abstract-text,
+.method-summary {
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.abstract-text p,
+.method-summary p { margin-bottom: 0.75rem; }
+.method-summary { max-width: 920px; margin: 0 auto 1.1rem auto; }
 .pipeline-figure { max-width: 1000px; margin: 0 auto; }
+.architecture-figure { max-width: 1000px; }
 .pipeline-figure img {
+  width: 100%;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: #fff;
@@ -248,7 +258,16 @@ pre.bibtex code { background: transparent; color: inherit; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
+  .demo-container { padding-left: 1rem; padding-right: 1rem; }
   .publication-title .subtitle-line { font-size: 1.1rem; }
   .vid-card { width: 220px; }
   .chain-arrow { width: 120px; }
+  .short-case { flex: 1 1 100%; max-width: 100%; }
+  .short-case .chain-row {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+  .short-case .vid-card { width: min(220px, 72vw); }
+  .short-case .chain-arrow { width: 90px; }
+  pre.bibtex { font-size: 0.78rem; }
 }

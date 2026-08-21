@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- ============ EDIT: page <title> and social meta ============ -->
-  <title>InfinityEdit: Infinite Streaming Video Editing with a Lightweight Edit-Ignition Adapter</title>
-  <meta name="description" content="InfinityEdit: instruction-guided streaming video editing for unbounded sequential edits.">
+  <title>InfinityEdit: Infinite Video Editing with a Lightweight Edit-Ignition Adapter</title>
+  <meta name="description" content="InfinityEdit: infinite video editing with a lightweight Edit-Ignition Adapter.">
 
   <!-- Open Graph / social preview (EDIT urls + image) -->
-  <meta property="og:title" content="InfinityEdit: Infinite Streaming Video Editing with a Lightweight Edit-Ignition Adapter">
-  <meta property="og:description" content="Instruction-guided streaming video editing for unbounded sequential edits.">
+  <meta property="og:title" content="InfinityEdit: Infinite Video Editing with a Lightweight Edit-Ignition Adapter">
+  <meta property="og:description" content="Infinite video editing with a lightweight Edit-Ignition Adapter.">
   <meta property="og:image" content="static/images/teaser.svg">
   <meta property="og:type" content="website">
 
@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="static/css/index.css?v=6">
+  <link rel="stylesheet" href="static/css/index.css?v=8">
 </head>
 
 <body>
@@ -34,28 +34,43 @@
 
           <!-- ============ EDIT: paper title ============ -->
           <h1 class="title is-2 publication-title">
-            InfinityEdit: Infinite Streaming Video Editing<br>
+            InfinityEdit: Infinite Video Editing<br>
             <span class="subtitle-line">with a Lightweight Edit-Ignition Adapter</span>
           </h1>
 
           <!-- ============ EDIT: authors. Superscripts map to affiliations below ============ -->
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="#">Yunze Tong</a><sup>1</sup>,</span>
+              Yunze Tong<sup>1,&#8728;</sup>,</span>
             <span class="author-block">
-              <a href="#">Mushui Liu</a><sup>1,2</sup>,</span>
+              Mushui Liu<sup>1,2,&#8728;,&dagger;</sup>,</span>
             <span class="author-block">
-              <a href="#">Author Three</a><sup>2</sup>,</span>
+              Canyu Zhao<sup>1</sup>,</span>
             <span class="author-block">
-              <a href="#">Senior Author</a><sup>1&#9993;</sup></span>
+              Shiyi Zhang<sup>2</sup>,</span>
+            <span class="author-block">
+              Didi Zhu<sup>1</sup>,</span>
+            <span class="author-block">
+              Peng Zhang<sup>1,2</sup>,</span>
+            <span class="author-block">
+              Wanggui He<sup>2</sup>,</span>
+            <span class="author-block">
+              Jinlong Liu<sup>2</sup>,</span>
+            <span class="author-block">
+              Ying Chen<sup>2</sup>,</span>
+            <span class="author-block">
+              Hao Jiang<sup>2,&dagger;</sup>,</span>
+            <span class="author-block">
+              Pipei Huang<sup>2</sup></span>
           </div>
 
           <div class="is-size-6 publication-authors">
-            <span class="author-block"><sup>1</sup>Affiliation One</span>&nbsp;&nbsp;
-            <span class="author-block"><sup>2</sup>Affiliation Two</span>
+            <span class="author-block"><sup>1</sup>Zhejiang University</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Alibaba Group</span>
           </div>
           <div class="is-size-7 publication-authors note">
-            <span>&#9993; Corresponding author</span>
+            <span><sup>&#8728;</sup> Equal contribution</span>&nbsp;&nbsp;
+            <span><sup>&dagger;</sup> Corresponding author</span>
           </div>
 
           <!-- ============ EDIT: link buttons (set href; remove any you don't have yet) ============ -->
@@ -68,12 +83,12 @@
             </span>
             <span class="link-block">
               <a href="#" class="external-link button is-rounded is-dark">
-                <span class="icon"><i class="ai ai-arxiv"></i><i class="fas fa-file-lines"></i></span>
+                <span class="icon"><i class="fas fa-file-lines"></i></span>
                 <span>arXiv</span>
               </a>
             </span>
             <span class="link-block">
-              <a href="#" class="external-link button is-rounded is-dark">
+              <a href="https://github.com/YunzeTong/InfinityEdit" class="external-link button is-rounded is-dark">
                 <span class="icon"><i class="fab fa-github"></i></span>
                 <span>Code</span>
               </a>
@@ -97,57 +112,52 @@
   <div class="container is-max-widescreen">
     <p class="teaser-tagline has-text-centered">
       One instruction after another, applied to a live stream &mdash; edits stack
-      <b>indefinitely</b> without re-encoding the source or growing memory.
+      <b>infinitely</b>.
+      <!-- without re-encoding the source or growing memory. -->
     </p>
   </div>
 </section>
 
-<!-- ===================== ABSTRACT + METHOD (temporarily hidden) =====================
+<!-- ===================== ABSTRACT ===================== -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          [ EDIT: abstract text ]
+        <div class="content abstract-text has-text-justified">
           <p>
-            Traditional video editing operates <em>in place</em>: it transforms a fixed-length
-            clip frame-by-frame against the source. We instead study <b>streaming video editing</b>,
-            where an edit produces a temporally <em>subsequent</em> segment that continues an
-            ongoing stream, and where a sequence of instructions can be applied in turn so that each
-            edited segment becomes the conditioning history for the next &mdash; enabling
-            <b>unbounded sequential editing</b>.
-          </p>
-          <p>
-            Built on a frozen streaming long-video generator, our method attaches a lightweight
-            <b>Edit-Ignition Adapter</b> that injects an instruction while preserving temporal
-            consistency, leaving every base weight untouched. At inference, the adapter
-            &ldquo;ignites&rdquo; an edit on a single chunk and the frozen backbone propagates it
-            through history; an <b>anchored sliding-window</b> keeps memory constant so edits can be
-            stacked forever without drift. (Placeholder abstract &mdash; replace with the final text.)
+            With large pretrained models, existing methods have effectively improved
+            instruction-based video editing. However, most of them rely on an
+            <em>in-place</em> editing assumption: they align the edited video with the
+            given source clip frame by frame over a fixed time span. This pattern fails
+            for open-ended streams, <em>e.g.</em>, restyling a live game or applying a
+            camera move to an ongoing shot. In such cases, edits must extend to future
+            frames as they arrive, rather than be applied to a static input clip. We
+            formalize the task of <strong>infinite video editing</strong>: given a
+            preceding segment and an edit request, a model must generate the next segment
+            that continues the stream while applying the requested edit. This process
+            repeats as an unbounded sequence of edit instructions arrives. This task
+            brings two challenges: the edit must be a faithful continuation rather than a
+            frame-wise rewrite, and generation quality must remain stable as edits
+            accumulate. To address them, we first design a data-collection pipeline for
+            infinite video editing. Based on the collected data, we propose
+            <strong>InfinityEdit</strong>, a lightweight edit adapter that equips a
+            streaming video generator with unbounded editing ability. The adapter contains
+            three attention modules. History cross-attention guides the denoising frames
+            using the input frames. Temporal causal self-attention keeps temporal cues
+            flowing only from earlier frames to later ones. Edit cross-attention injects
+            the edit request into generation. During inference, the adapter is activated
+            only in the chunk where an edit request arrives. Subsequent chunks are
+            generated by the original model with a reset anchor frame. This scheme applies
+            the edit while preserving the original model's infinite generation ability.
+            Extensive experiments show that InfinityEdit faithfully continues the stream
+            under each edit, and stays stable over unbounded edit sequences.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-===================== METHOD / PIPELINE =====================
-<section class="section">
-  <div class="container is-max-widescreen">
-    <h2 class="title is-3 has-text-centered">Method</h2>
-    <figure class="image pipeline-figure">
-      [ EDIT: replace with your pipeline / architecture figure ]
-      <img src="static/images/pipeline.svg" alt="InfinityEdit pipeline">
-    </figure>
-    <p class="caption has-text-centered content">
-      <b>Overview.</b> A frozen streaming backbone (Helios) generates chunk-by-chunk; a trainable
-      Edit-Ignition Adapter (History Cross-Attention &rarr; Temporal Causal Self-Attention &rarr;
-      Edit Cross-Attention) injects the instruction. Replace this placeholder with your real figure.
-    </p>
-  </div>
-</section>
-==================== end of temporarily-hidden ABSTRACT + METHOD ==================== -->
 
 <!-- ===================== SHORT VIDEO EDITING (single instruction, by category) ===================== -->
 <section class="section">
@@ -206,17 +216,45 @@
   </div>
 </section>
 
+<!-- ===================== METHOD / ARCHITECTURE ===================== -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Method</h2>
+    <div class="content method-summary has-text-justified">
+      <p>
+        To achieve infinite video editing, InfinityEdit attaches a lightweight
+        Edit-Ignition Adapter to a frozen streaming video generator. The backbone
+        generates one latent video chunk at a time while conditioning on a multi-scale
+        history window and an anchor frame. Adapter blocks are inserted after transformer
+        layers and update the current-chunk features while leaving the history tokens
+        unchanged.
+      </p>
+      <p>
+        Each adapter block has three stages. History Cross-Attention anchors leading
+        denoising frames to the provided history. Temporal Causal Self-Attention
+        propagates information forward along time. Edit Cross-Attention injects the
+        edit instruction into all current-chunk tokens. During inference, the adapter
+        ignites only the first chunk after an edit request arrives. Later chunks are
+        continued by the frozen backbone with a sliding history window and a reset anchor
+        frame, keeping memory bounded while allowing edits to stack over time.
+      </p>
+    </div>
+    <figure class="image pipeline-figure architecture-figure">
+      <img src="static/images/architecture.png" alt="InfinityEdit Edit-Ignition Adapter architecture">
+    </figure>
+    <p class="caption has-text-centered content">
+      <b>Architecture.</b> The Edit-Ignition Adapter is composed of three attention
+      modules: History Cross-Attention, Temporal Causal Self-Attention, and Edit
+      Cross-Attention.
+    </p>
+  </div>
+</section>
+
 <!-- ===================== BIBTEX ===================== -->
 <section class="section" id="bibtex">
   <div class="container is-max-desktop">
     <h2 class="title is-3">BibTeX</h2>
-    <!-- ============ EDIT: fill in your citation ============ -->
-    <pre class="bibtex"><code>@article{infinityedit2026,
-  title   = {InfinityEdit: Streaming Infinite Video Editing},
-  author  = {Author One and Author Two and Author Three and Senior Author},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
-  year    = {2026}
-}</code></pre>
+    <pre class="bibtex"><code>Coming soon.</code></pre>
   </div>
 </section>
 
