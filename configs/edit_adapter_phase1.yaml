@@ -1,0 +1,195 @@
+output_dir: ./outputs/
+logging_dir: logs
+seed: 42
+
+
+report_to:
+  tracker_name: InfinityEdit-Phase1
+  wandb_name: infinityedit_phase1_run
+  report_to: tensorboard
+
+
+data_config:
+  # ---- Base ----
+  use_shuffle: true
+  pin_memory: true
+  persistent_workers: true
+  dataloader_num_workers: 8
+  prefetch_factor: 4
+  caption_dropout_p: 0
+  num_train_samples: null
+  # Optional newline-separated whitelist of latent .pt basenames to keep.
+  filter_filelist: null
+  # instance_data_root is populated dynamically by the shell script via --data_dirs
+
+
+model_config:
+  # ---- Path ----
+  pretrained_model_name_or_path: "./pretrained/Helios-Distilled"
+  transformer_model_name_or_path: "./pretrained/Helios-Distilled"
+  # ---- Vae ----
+  upcast_vae: false
+  enable_slicing: false
+  enable_tiling: false
+
+
+validation_config:
+  validation_steps: 500
+  validation_height: 384
+  validation_width: 640
+  validation_max_num_frames: 33
+  validation_prompts: []
+  validation_guidance_scale: 1.0
+  validation_latent_window_size:
+    - 9
+  num_validation_videos: 10
+  num_val_samples_per_instruction: 2
+  num_val_loss_samples_per_instruction: 10
+  num_inference_steps: 16
+  first_step_valid: true
+  stage2_simulated_inference_steps:
+    - 2
+    - 2
+    - 2
+  enable_pyramid_validation: "first_only"
+  enable_hybrid_validation: "false"
+  enable_multichunk_fixed_validation: "false"
+  enable_multichunk_pyramid_validation: "false"
+
+
+training_config:
+  # ---- Environment ----
+  allow_tf32: true
+  gradient_checkpointing: true
+  mixed_precision: "bf16"
+  # ---- Training Resource ----
+  # 32075 samples / (32 GPUs * bs=1 * ga=2) = ~501 steps/epoch
+  # 20000 steps ≈ 40 epochs
+  num_train_epochs: 200
+  max_train_steps: 50000
+  train_batch_size: 1
+  gradient_accumulation_steps: 2
+  checkpointing_steps: 500
+  checkpoints_total_limit: 100
+  resume_from_checkpoint: "latest"
+  save_safetensors: true
+  # ---- Optimizer ----
+  learning_rate: 3e-5
+  lr_scheduler: "cosine"
+  lr_warmup_steps: 1000
+  optimizer: "adamw"
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_weight_decay: 1e-04
+  adam_epsilon: 1e-08
+  max_grad_norm: 1.0
+  # ─── Sigma sampling (uniform across all levels) ───
+  weighting_scheme: "logit_normal"
+  logit_mean: -0.5
+  logit_std: 1.5
+  mode_scale: 1.29
+  # ---- Mixture Gaussian sigma sampling (uniform weights for Phase 1) ----
+  sigma_sampling_strategy: "logit_normal"
+  raw_final_sigma_floor: 0.005
+  mixture_rejection_sampling: true
+  mixture_centers:
+    - 0.999
+    - 0.937
+    - 0.874
+    - 0.812
+    - 0.749
+    - 0.687
+    - 0.624
+    - 0.562
+    - 0.499
+    - 0.437
+    - 0.374
+    - 0.312
+    - 0.249
+    - 0.187
+    - 0.124
+    - 0.062
+  mixture_stds:
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+    - 0.02
+  mixture_weights:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+  # ---- Dynamic Shifting Parameters ----
+  use_dynamic_shifting: true
+  base_seq_len: 256
+  max_seq_len: 4096
+  base_shift: 0.5
+  max_shift: 1.15
+  # ---- Stage 1 Parameters ----
+  is_enable_stage1: true
+  history_sizes:
+    - 16
+    - 2
+    - 1
+  latent_window_size:
+    - 9
+  is_random_drop: false
+  random_drop_v2v_ratio: 0
+  random_drop_t2v_ratio: 0
+  # ---- History Corruption (mitigate exposure bias) ----
+  corrupt_history: true
+  corrupt_mode_history: "noise"
+  corrupt_mode_prob_history: 0.9
+  is_frame_independent_corrupt_history: true
+  is_chunk_independent_corrupt_history: false
+  noise_corrupt_ratio_history_short: 0.33333333333333
+  noise_corrupt_ratio_history_mid: 0.33333333333333
+  noise_corrupt_ratio_history_long: 0.33333333333333
+  noise_corrupt_clean_prob_history: 0.1
+  downsample_min_corrupt_ratio_history: 0.9
+  downsample_max_corrupt_ratio_history: 1.0
+  has_multi_term_memory_patch: true
+  zero_history_timestep: true
+  restrict_self_attn: false
+  guidance_cross_attn: true
+  # ---- EMA ----
+  use_ema: true
+  use_ema_validation: true
+  ema_decay: 0.999
+  ema_start_step: 0
+  # ---- Edit Adapter Specific ----
+  edit_adapter_dim: 1024
+  edit_adapter_num_heads: 8
+  edit_adapter_text_dim: 4096
+  edit_adapter_eps: 1e-6
+  edit_adapter_data_mode: "separated"
+  edit_adapter_history_dim: 512
+  edit_adapter_history_num_heads: 4
+  edit_adapter_history_num_frames: 2
+  # ---- Temporal Loss Reweighting (OFF for Phase 1) ----
+  reweighting_along_time: false
+  temporal_weight_max_ratio: 2.0
